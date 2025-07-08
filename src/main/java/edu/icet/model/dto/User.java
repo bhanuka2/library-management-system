@@ -1,4 +1,4 @@
-package edu.icet.model;
+package edu.icet.model.dto;
 
 import lombok.*;
 
@@ -14,6 +14,6 @@ public class User {
     private String Contact_Information;
     private String Membership_Date;
 
-    public User(int userid, String name, String contactInformation, String membershipDate) {
-    }
+    //public User(int userid, String name, String contactInformation, String membershipDate) {
+   // }
 }

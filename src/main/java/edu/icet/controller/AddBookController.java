@@ -1,8 +1,8 @@
 package edu.icet.controller;
 
-import edu.icet.model.Book;
-import edu.icet.service.BookController;
-import edu.icet.service.BookService;
+import edu.icet.model.dto.Book;
+import edu.icet.service.custom.impl.BookServiceImpl;
+import edu.icet.service.custom.BookService;
 import edu.icet.util.CrudUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,11 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -57,6 +58,9 @@ public class AddBookController implements Initializable {
     @FXML
     private TextField txtTitle;
 
+    @FXML
+    private Label lblDate;
+
     private void clearFields() {
         txtISBN.clear();
         txtTitle.clear();
@@ -87,16 +91,31 @@ public class AddBookController implements Initializable {
         }
 
         int i = preparedStatement.executeUpdate();
+        LoadTable();
         clearFields();
 
 
     }
 
 
-    private void LoadTable(){
+    private void LoadTable() throws SQLException {
+       // BookService service = new BookServiceImpl();
+       // List<Book> all = service.getAll();
 
-        BookService service = new BookController();
-        List<Book> all = service.getAll();
+        ObservableList<Book> bookObservableList = FXCollections.observableArrayList();
+            ResultSet resultSet = CrudUtil.execute("SELECT * FROM book");
+
+            while (resultSet.next()) {
+                bookObservableList.add(new Book(
+
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getInt(5)
+
+            ));
+        }
 
         colISBN.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
         colTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
@@ -104,37 +123,11 @@ public class AddBookController implements Initializable {
         colCategory.setCellValueFactory(new PropertyValueFactory<>("Category"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
 
-        try {
-            ResultSet resultSet = CrudUtil.execute("SELECT * FROM book");
-
-            while (resultSet.next()) {
-                books.add(new Book(
-                        resultSet.getString(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getInt(5)
-
-                ));
-            }
-
-
-        ObservableList<Book> bookObservableList = FXCollections.observableArrayList();
-        books.forEach(Book -> bookObservableList.add(Book));
-
         tblBooks.setItems(bookObservableList);
 
 
-        //            e.printStackTrace();
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Database Error");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Failed to load customers.");
-//            alert.show();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
 
 
         }
@@ -143,9 +136,15 @@ public class AddBookController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        //lblDDTT.setText(String.valueOf(DDTT));
-
-        LoadTable();
+        java.util.Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
+        String format1 = format.format(date);
+        lblDate.setText(format1);
+        try {
+            LoadTable();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

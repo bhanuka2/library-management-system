@@ -1,7 +1,6 @@
 package edu.icet.controller;
 
-import edu.icet.model.Book;
-import edu.icet.model.User;
+import edu.icet.model.dto.User;
 import edu.icet.util.CrudUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,6 +74,8 @@ public class AddMemberController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        Loadtable();
+        clear();
     }
 
     @FXML
@@ -86,6 +87,14 @@ public class AddMemberController implements Initializable {
     @FXML
     void btnSearchOnAction(ActionEvent event) {
 
+    }
+
+    private void clear(){
+
+        txtUserid.clear();
+        txtName.clear();
+        txtDate.clear();;
+        txtContact.clear();
     }
 
     private void Loadtable() {

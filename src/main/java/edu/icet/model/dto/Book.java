@@ -1,4 +1,4 @@
-package edu.icet.model;
+package edu.icet.model.dto;
 
 import lombok.*;
 
@@ -15,6 +15,6 @@ public class Book {
     private String Category;
     private Integer Quantity;
 
-    public Book(String id, String name, String address, double salary) {
-    }
+//    public Book(String id, String name, String address, double salary) {
+//    }
 }
