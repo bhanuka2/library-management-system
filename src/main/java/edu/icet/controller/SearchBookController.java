@@ -1,8 +1,8 @@
 package edu.icet.controller;
 
-import edu.icet.model.Book;
-import edu.icet.service.BookController;
-import edu.icet.service.BookService;
+import edu.icet.model.dto.Book;
+import edu.icet.service.custom.impl.BookServiceImpl;
+import edu.icet.service.custom.BookService;
 import edu.icet.util.CrudUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,19 +61,37 @@ public class SearchBookController implements Initializable {
     private ComboBox<?> cmbISBN;
 
 
-    @FXML
-    void btnSearchOnAction(ActionEvent event) {
+  //  @FXML
+//    Book btnSearchOnAction(ActionEvent event) throws SQLException {
+//        searchById();
 
+    //    return null;
+   // }
+
+    public Book searchById(String ISBN) throws SQLException {
+
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM book WHERE ISBN=?", ISBN);
+        if (resultSet.next()) {
+            return new Book(
+                    resultSet.getString("ISBN"),
+                    resultSet.getString("Title"),
+                    resultSet.getString("Author"),
+                    resultSet.getString("Category"),
+                    resultSet.getInt("Category")
+            );
+        }
+        return null;
 
     }
+
     List<Book>books=new ArrayList<>();
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        BookService service = new BookController();
-        List<Book> all = service.getAll();
+        BookService service = new BookServiceImpl();
+       // List<Book> all = service.getAll();
 
         colISBN.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
         colTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
@@ -124,4 +142,6 @@ public class SearchBookController implements Initializable {
         txtISBN.setEditable(false);
     }
 
+    public void btnSearchOnAction(ActionEvent actionEvent) {
+    }
 }
