@@ -10,8 +10,8 @@ import lombok.*;
 public class BookEntity {
 
     private String ISBN;
-    private String Author;
     private String Title;
+    private String Author;
     private String Category;
     private Integer Quantity;
 

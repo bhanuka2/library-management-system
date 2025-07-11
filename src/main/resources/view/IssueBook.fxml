@@ -22,14 +22,14 @@
       </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="-1.0" layoutY="396.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <TableView fx:id="tblIssueRecord" layoutX="17.0" layoutY="231.0" prefHeight="155.0" prefWidth="555.0">
-        <columns>
-          <TableColumn fx:id="colRecordID" prefWidth="89.0" text="RecordID" />
-          <TableColumn fx:id="colUserID" prefWidth="73.0" text="UserID" />
+         <columns>
+            <TableColumn fx:id="colRecordID" prefWidth="89.0" text="RecordID" />
+            <TableColumn fx:id="colUserID" prefWidth="73.0" text="UserID" />
             <TableColumn fx:id="colBookID" prefWidth="82.0" text="BookID" />
             <TableColumn fx:id="colBorrowDate" prefWidth="128.0" text="Borrow Date" />
             <TableColumn fx:id="colReturnDate" prefWidth="109.0" text="Return Date" />
             <TableColumn fx:id="colFine" prefWidth="73.0" text="Fine" />
-        </columns>
+         </columns>
       </TableView>
 
       <NumberValidator />
@@ -52,12 +52,12 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="txtBorrowDate" layoutX="282.0" layoutY="160.0" text="Borrow Date" textFill="WHITE">
+      <Label layoutX="282.0" layoutY="160.0" text="Borrow Date" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="407.0" layoutY="152.0" />
+      <TextField fx:id="txtBorrowDate" layoutX="407.0" layoutY="152.0" />
       <Label layoutX="33.0" layoutY="163.0" text="Fine" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />

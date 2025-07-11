@@ -1,18 +1,17 @@
 package edu.icet.controller;
 
 import edu.icet.model.dto.Book;
+import edu.icet.service.ServiceFactory;
 import edu.icet.service.custom.impl.BookServiceImpl;
 import edu.icet.service.custom.BookService;
 import edu.icet.util.CrudUtil;
+import edu.icet.util.ServiceType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -57,81 +56,8 @@ public class SearchBookController implements Initializable {
     @FXML
     private TextField txtTitle;
 
-    @FXML
-    private ComboBox<?> cmbISBN;
+    BookService bookService = ServiceFactory.getInstance().getServiceType(ServiceType.Book);
 
-
-  //  @FXML
-//    Book btnSearchOnAction(ActionEvent event) throws SQLException {
-//        searchById();
-
-    //    return null;
-   // }
-
-    public Book searchById(String ISBN) throws SQLException {
-
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM book WHERE ISBN=?", ISBN);
-        if (resultSet.next()) {
-            return new Book(
-                    resultSet.getString("ISBN"),
-                    resultSet.getString("Title"),
-                    resultSet.getString("Author"),
-                    resultSet.getString("Category"),
-                    resultSet.getInt("Category")
-            );
-        }
-        return null;
-
-    }
-
-    List<Book>books=new ArrayList<>();
-
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        BookService service = new BookServiceImpl();
-       // List<Book> all = service.getAll();
-
-        colISBN.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
-        colTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        colAuthor.setCellValueFactory(new PropertyValueFactory<>("Author"));
-        colCategory.setCellValueFactory(new PropertyValueFactory<>("Category"));
-        colQuantity.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
-
-        try {
-            ResultSet resultSet = CrudUtil.execute("SELECT * FROM book");
-            while (resultSet.next()) {
-
-                    books.add(new Book(
-                            resultSet.getString(1),
-                            resultSet.getString(2),
-                            resultSet.getString(3),
-                            resultSet.getString(4),
-                            resultSet.getInt(5)
-
-                    ));
-
-                tblBooks.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-                    if (newSelection != null) {
-                        populateFields(newSelection);
-                    }
-                });
-
-
-            }
-
-
-
-        ObservableList<Book> bookObservableList = FXCollections.observableArrayList();
-            books.forEach(Book -> bookObservableList.add(Book));
-
-            tblBooks.setItems(bookObservableList);
-        } catch (SQLException e) {
-
-        }
-
-        }
 
     private void populateFields(Book book) {
         txtISBN.setText(book.getISBN());
@@ -142,6 +68,25 @@ public class SearchBookController implements Initializable {
         txtISBN.setEditable(false);
     }
 
-    public void btnSearchOnAction(ActionEvent actionEvent) {
+    public void btnSearchOnAction(ActionEvent actionEvent) throws SQLException {
+        String isbn = txtISBN.getText();
+        Book book = bookService.searchById(isbn);
+
+        List<Book>books =new ArrayList<>();
+            populateFields(book);
+            ObservableList<Book> bookList = FXCollections.observableArrayList(books);
+            bookList.add(book);
+            tblBooks.setItems(bookList);
+    }
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        colISBN.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+        colTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        colAuthor.setCellValueFactory(new PropertyValueFactory<>("Author"));
+        colCategory.setCellValueFactory(new PropertyValueFactory<>("Category"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+        tblBooks.refresh();
     }
 }

@@ -10,9 +10,9 @@ public interface BookService extends SuperService {
 
     Boolean addbook(Book book) throws SQLException;
     Boolean updateCustomer(Book book);
-    Book searchById(String id) throws SQLException;
+    Book searchById(String isbn) throws SQLException;
     List<Book> getAll() throws SQLException;
-
     List<String> getBookIds() throws SQLException;
+    List<Book> deleteBooks(String id) throws SQLException;
 
 }

@@ -1,4 +1,7 @@
 package edu.icet.repository.custom;
 
-public interface BookRepository {
+import edu.icet.model.entity.BookEntity;
+import edu.icet.repository.CrudRepository;
+
+public interface BookRepository extends CrudRepository<BookEntity , String> {
 }

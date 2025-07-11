@@ -76,6 +76,9 @@ public class DashBoardController {
 
     @FXML
     void btnExitOnAction(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
 
     }
 

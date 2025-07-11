@@ -1,23 +1,21 @@
 package edu.icet.controller;
 
-import edu.icet.model.dto.Book;
 import edu.icet.model.dto.IssueRecord;
-import edu.icet.util.CrudUtil;
+import edu.icet.service.ServiceFactory;
+import edu.icet.service.custom.IssueRecordService;
+import edu.icet.util.ServiceType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class IssueBookController implements Initializable {
+public class IssueBookController {
 
     @FXML
     private TableColumn colBookID;
@@ -44,7 +42,7 @@ public class IssueBookController implements Initializable {
     private TextField txtBookID;
 
     @FXML
-    private Label txtBorrowDate;
+    private TextField txtBorrowDate;
 
     @FXML
     private TextField txtFine;
@@ -59,75 +57,62 @@ public class IssueBookController implements Initializable {
     private TextField txtUserID;
 
     List<IssueRecord> IssueList = new ArrayList<>();
+
+IssueRecordService issueRecordService = ServiceFactory.getInstance().getServiceType(ServiceType.IssueRecord);
+
     @FXML
-    void btnsaveOnAction(ActionEvent event) {
-
-
-        try {
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/readhub","root","1234");
-
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO issue-table VALUES(?,?,?,?,?,?)");
-
-        preparedStatement.setInt(1,Integer.parseInt(txtRecordID.getText()));
-        preparedStatement.setInt(2,Integer.parseInt(txtUserID.getText()));
-        preparedStatement.setString(3,txtBookID.getText());
-        preparedStatement.setString(4,txtBorrowDate.getText());
-        preparedStatement.setString(5, (txtReturnDate.getText()));
-        preparedStatement.setString(6,txtFine.getText());
-
-
-        if(txtUserID.getText().isEmpty() || txtRecordID.getText().isEmpty() || txtBookID.getText().isEmpty() || txtBorrowDate.getText().isEmpty() || txtReturnDate.getText().isEmpty()){
-            new Alert(Alert.AlertType.WARNING,"Please fill in all fields.").show();
+    void btnsaveOnAction(ActionEvent event) throws SQLException {
+        if (txtRecordID.getText().isEmpty() || txtUserID.getText().isEmpty() ||
+                txtBookID.getText().isEmpty() || txtBorrowDate.getText().isEmpty() ||
+                txtReturnDate.getText().isEmpty() || txtFine.getText().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please fill all fields").show();
             return;
-        }else{
-            new Alert(Alert.AlertType.CONFIRMATION,"Successfully Added").show();
         }
+            int recordID = Integer.parseInt(txtRecordID.getText().trim());
+            int userID = Integer.parseInt(txtUserID.getText().trim());
+            String bookID = txtBookID.getText().trim();
+            Date borrowDate = Date.valueOf(txtBorrowDate.getText().trim());
+            Date returnDate = Date.valueOf(txtReturnDate.getText().trim());
+            double fine = Double.parseDouble(txtFine.getText().trim());
 
-        int i = preparedStatement.executeUpdate();
-        LoadTable();
-       // clearFields();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+            IssueRecord issueRecord =new IssueRecord(recordID,userID,bookID,borrowDate,returnDate,fine);
+        Boolean b = issueRecordService.AddRecord(issueRecord);
+
+
+        if (borrowDate.after(returnDate)) {
+                new Alert(Alert.AlertType.ERROR, "Return date must be after borrow date").show();
+                return;
+            }
+
+            if (b) {
+                new Alert(Alert.AlertType.INFORMATION, "Issue Record Added Successfully").show();
+                loadTable();
+                clearFields();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to Add Issue Record").show();
+            }
+
     }
-    private void LoadTable() throws SQLException {
+    private void clearFields() {
+        txtRecordID.clear();
+        txtUserID.clear();
+        txtBookID.clear();
+        txtBorrowDate.clear();
+        txtReturnDate.clear();
+        txtFine.clear();
+    }
 
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM issue-table");
-
-        while (resultSet.next()) {
-            IssueList.add(new IssueRecord(
-                    resultSet.getInt(1),
-                    resultSet.getInt(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5),
-                    resultSet.getString(6)
-
-            ));
-        }
+    public void loadTable() throws SQLException {
+        List<IssueRecord> allRecords =issueRecordService.getAllRecords();
+        ObservableList<IssueRecord> userObservableList = FXCollections.observableArrayList(allRecords);
+        tblIssueRecord.setItems(userObservableList);
 
         colRecordID.setCellValueFactory(new PropertyValueFactory<>("RecordID"));
         colUserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
         colBookID.setCellValueFactory(new PropertyValueFactory<>("BookID"));
         colBorrowDate.setCellValueFactory(new PropertyValueFactory<>("BorrowDate"));
         colReturnDate.setCellValueFactory(new PropertyValueFactory<>("ReturnDate"));
-
-
-
-
-        ObservableList<IssueRecord> issuebookObservableList = FXCollections.observableArrayList();
-        IssueList.forEach(IssueRecord -> issuebookObservableList.add(IssueRecord));
-
-        tblIssueRecord.setItems(issuebookObservableList);
-
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        try {
-//            LoadTable();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
+        colFine.setCellValueFactory(new PropertyValueFactory<>("Fine"));
     }
 }

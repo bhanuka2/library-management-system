@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 @Data
 @NoArgsConstructor
@@ -15,7 +16,7 @@ public class IssueRecordEntity {
     private Integer RecordID;
     private Integer UserID;
     private String BookID;
-    private String BorrowDate;
-    private String ReturnDate;
-    private String Fine;
+    private Date BorrowDate;
+    private Date ReturnDate;
+    private Double Fine;
 }
