@@ -117,7 +117,7 @@ ReturnRecordService returnRecordService = ServiceFactory.getInstance().getServic
         colBookID.setCellValueFactory(new PropertyValueFactory<>("BookID"));
         colBorrowDate.setCellValueFactory(new PropertyValueFactory<>("BorrowDate"));
         colReturnDate.setCellValueFactory(new PropertyValueFactory<>("ReturnDate"));
-        colFine.setCellValueFactory(new PropertyValueFactory<>("Fine"));
+        colFine.setCellValueFactory(new PropertyValueFactory<>("fine"));
     }
 
 

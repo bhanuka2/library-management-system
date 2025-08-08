@@ -20,7 +20,6 @@
             <Font name="System Bold Italic" size="16.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="-1.0" layoutY="396.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <TableView fx:id="tblIssueRecord" layoutX="17.0" layoutY="231.0" prefHeight="155.0" prefWidth="555.0">
          <columns>
             <TableColumn fx:id="colRecordID" prefWidth="89.0" text="RecordID" />
@@ -33,7 +32,6 @@
       </TableView>
 
       <NumberValidator />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a6a8ab83" height="155.0" layoutX="18.0" layoutY="40.0" stroke="BLACK" strokeType="INSIDE" width="571.0" />
       <Label layoutX="28.0" layoutY="65.0" text="User-ID" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />

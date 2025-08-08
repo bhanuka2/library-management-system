@@ -1,60 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="398.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.DashBoardController">
+<AnchorPane prefHeight="398.0" prefWidth="602.0" style="-fx-background-color: #9ECAD6;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.DashBoardController">
    <children>
       <AnchorPane fx:id="rooot" layoutX="163.0" layoutY="8.0" prefHeight="400.0" prefWidth="438.0">
          <children>
-            <ImageView fitHeight="408.0" fitWidth="647.0" layoutX="-48.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/1.jpg" />
-               </image>
-            </ImageView>
-            <AnchorPane fx:id="root" layoutX="-18.0" prefHeight="400.0" prefWidth="577.0" />
+            <AnchorPane fx:id="root" layoutX="-26.0" prefHeight="400.0" prefWidth="577.0" />
          </children>
       </AnchorPane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ae21ff" height="408.0" stroke="BLACK" strokeType="INSIDE" width="144.0" />
-      <JFXButton layoutX="14.0" layoutY="107.0" onAction="#btnAddOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #4d4d4d;" text="Add Book" textFill="WHITE">
+      <JFXButton layoutX="6.0" layoutY="135.0" onAction="#btnAddOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #7D8D86;" text="Add Book" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="16.0" layoutY="150.0" onAction="#btnAddMemberOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #4d4d4d;" text="Add Member" textFill="WHITE">
+      <JFXButton layoutX="7.0" layoutY="171.0" onAction="#btnAddMemberOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #7D8D86;" text="Add Member" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="16.0" layoutY="227.0" onAction="#btnIssueOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #4d4d4d;" text="Issue Book" textFill="WHITE">
+      <JFXButton layoutX="7.0" layoutY="249.0" onAction="#btnIssueOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #7D8D86;" text="Issue Book" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="17.0" layoutY="266.0" onAction="#btnReturnOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #4d4d4d;" text="Return Book" textFill="WHITE">
+      <JFXButton layoutX="7.0" layoutY="292.0" onAction="#btnReturnOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #7D8D86;" text="Return Book" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <Label layoutX="32.0" layoutY="5.0" text="ReadHUB" textFill="WHITE">
-         <font>
-            <Font name="System Bold Italic" size="17.0" />
-         </font>
-      </Label>
-      <JFXButton layoutX="18.0" layoutY="306.0" onAction="#btnExitOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #4d4d4d;" text="EXIT" textFill="WHITE">
+      <JFXButton layoutX="9.0" layoutY="335.0" onAction="#btnExitOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #7D8D86;" text="EXIT" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="16.0" layoutY="188.0" onAction="#btnSearchOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #4d4d4d;" text="Search Book" textFill="WHITE">
+      <JFXButton layoutX="7.0" layoutY="211.0" onAction="#btnSearchOnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #7D8D86;" text="Search Book" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
+      <ImageView fitHeight="86.0" fitWidth="85.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/2.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

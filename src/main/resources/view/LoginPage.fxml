@@ -9,40 +9,40 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="384.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.LoginPageController">
+<AnchorPane prefHeight="384.0" prefWidth="595.0" style="-fx-background-color: #F5F5F5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.LoginPageController">
    <children>
-      <ImageView fitHeight="338.0" fitWidth="602.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../library-system/src/main/resources/img/22.png" />
-         </image>
-      </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="48.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="601.0" />
-      <Label layoutX="175.0" layoutY="2.0" prefHeight="43.0" prefWidth="183.0" text="Welcome to" textFill="#9e9c9c">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#188d8d" height="48.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="601.0" />
+      <Label layoutX="146.0" layoutY="8.0" prefHeight="43.0" prefWidth="183.0" text="Welcome to" textFill="WHITE">
          <font>
             <Font name="Colonna MT" size="35.0" />
          </font>
       </Label>
-      <Label layoutX="370.0" layoutY="4.0" prefHeight="31.0" prefWidth="110.0" text="readHub">
+      <Label layoutX="341.0" layoutY="10.0" prefHeight="31.0" prefWidth="110.0" text="readHub">
          <font>
             <Font name="Colonna MT" size="30.0" />
          </font>
       </Label>
       <Label layoutX="4.0" layoutY="363.0" text="\@ 2025 readHub" textFill="WHITE" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a8abb1" height="203.0" layoutX="166.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="246.0" />
-      <TextField fx:id="txtUsername" layoutX="179.0" layoutY="144.0" opacity="0.93" prefHeight="31.0" prefWidth="217.0" promptText="Username" style="-fx-background-color: ;">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffffb0" height="228.0" layoutX="166.0" layoutY="107.0" stroke="WHITE" strokeType="INSIDE" width="246.0" />
+      <TextField fx:id="txtUsername" layoutX="179.0" layoutY="193.0" opacity="0.93" prefHeight="31.0" prefWidth="217.0" promptText="Username" style="-fx-background-color: ;">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtPassword" layoutX="179.0" layoutY="198.0" prefHeight="31.0" prefWidth="217.0" promptText="Password">
+      <TextField fx:id="txtPassword" layoutX="179.0" layoutY="240.0" prefHeight="31.0" prefWidth="217.0" promptText="Password">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <Button layoutX="248.0" layoutY="252.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: blue;" text="Login" textFill="WHITE">
+      <Button layoutX="248.0" layoutY="284.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #188d8d;" text="Login" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="11.0" />
          </font>
       </Button>
+      <ImageView fitHeight="54.0" fitWidth="101.0" layoutX="258.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/2.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
