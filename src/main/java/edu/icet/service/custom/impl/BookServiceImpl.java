@@ -45,6 +45,8 @@ public class BookServiceImpl implements BookService {
         return null;
     }
 
+
+
     @Override
     public List<Book> getAll() throws SQLException {
         List<BookEntity> entities = bookRepository.getAll();

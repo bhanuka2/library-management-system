@@ -8,8 +8,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static java.awt.SystemColor.window;
-
 public class HomePageController {
 
     @FXML
@@ -29,7 +27,7 @@ public class HomePageController {
     @FXML
     void btnIssueBookOnAction(ActionEvent event) throws IOException {
         Stage stage=new Stage();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/IssueBook.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ReturnBook.fxml"))));
         stage.show();
     }
 

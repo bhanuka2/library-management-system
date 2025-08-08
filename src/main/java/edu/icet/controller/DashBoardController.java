@@ -70,7 +70,15 @@ public class DashBoardController {
 
 
     @FXML
-    void btnReturnOnAction(ActionEvent event) {
+    void btnReturnOnAction(ActionEvent event) throws IOException {
+
+        URL resource = this.getClass().getResource("/view/ReturnBook.fxml");
+
+        assert resource != null;
+
+        Parent load = FXMLLoader.load(resource);
+        this.root.getChildren().clear();
+        this.root.getChildren().add(load);
 
     }
 

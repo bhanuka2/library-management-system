@@ -4,18 +4,15 @@ import edu.icet.model.dto.IssueRecord;
 import edu.icet.model.entity.IssueRecordEntity;
 import edu.icet.repository.DAOFactory;
 import edu.icet.repository.custom.IssuerecordRepository;
-import edu.icet.service.custom.IssueRecordService;
-import edu.icet.util.CrudUtil;
+import edu.icet.service.custom.ReturnRecordService;
 import edu.icet.util.RepositoryType;
 import org.modelmapper.ModelMapper;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class IssueRecordImpl implements IssueRecordService {
+public class ReturnRecordImpl implements ReturnRecordService {
 
     IssuerecordRepository issuerecordRepository= DAOFactory.getInstance().getRepositoryType(RepositoryType.IssueRecord);
 

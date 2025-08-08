@@ -6,7 +6,7 @@ import edu.icet.service.SuperService;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IssueRecordService extends SuperService {
+public interface ReturnRecordService extends SuperService {
      Boolean AddRecord(IssueRecord issueRecord ) throws SQLException;
      List<IssueRecord>getAllRecords() throws SQLException;
 

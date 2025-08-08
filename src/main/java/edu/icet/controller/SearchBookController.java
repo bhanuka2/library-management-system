@@ -82,11 +82,21 @@ public class SearchBookController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<Book> all = null;
+        try {
+            all = bookService.getAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        ObservableList<Book> bookObservableList = FXCollections.observableArrayList(all);
+
         colISBN.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
         colTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
         colAuthor.setCellValueFactory(new PropertyValueFactory<>("Author"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("Category"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+
+        tblBooks.setItems(bookObservableList);
         tblBooks.refresh();
     }
 }

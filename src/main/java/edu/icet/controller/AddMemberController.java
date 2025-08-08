@@ -132,15 +132,22 @@ public class AddMemberController implements Initializable {
     private void Loadtable() throws SQLException {
         List<User> all = userService.getAll();
         ObservableList<User> userObservableList = FXCollections.observableArrayList(all);
-        tblUser.setItems(userObservableList);
+
         colID.setCellValueFactory(new PropertyValueFactory<>("userID"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colContact.setCellValueFactory(new PropertyValueFactory<>("contact_Information"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("membership_Date"));
+
+        tblUser.setItems(userObservableList);
         tblUser.refresh();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            Loadtable();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
